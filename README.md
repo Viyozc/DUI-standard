@@ -173,12 +173,10 @@ class Person extends React.Component {
   // getters and setters
   get attr() {}
 
-  // handlers
-  handleClick() {},
-
-  // render
-  renderChild() {},
   render () {},
+  
+  // custom
+  handleClick() {},
 
 }
 
