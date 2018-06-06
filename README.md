@@ -1,7 +1,7 @@
 
 ## 前端开发编码规范
 
-> 基础规范推荐 [Eslint-standard](#https://github.com/standard/standard)标准, 该规范为补充 `Eslint` 之外的编码标准.
+> 基础规范参照 [Eslint-standard](#https://github.com/standard/standard)标准, 该规范为补充 `Eslint` 规范之外的编码标准.
 
 
 ### 目录:
@@ -36,9 +36,11 @@ Project
     |- package.json
     |- README.md
 ```
+
 2. 项目文件命名规范
-    - 目录统一小写命名
-    - 文件名采用 `-` 连接, 如: `user-name.js`
+    - 目录统一驼峰命名
+    - 文件名采用驼峰命名方式, 如: `homePage/userName.js`. 
+    - 依据一致性原则, 遵循项目原有规范.
     
     
 ### <h3 id='p2'>HTML编码规范</h3>
@@ -48,10 +50,8 @@ Project
 2. 减少标签数量   
 在编写HTML代码时，需要尽量避免多余的父节点.
 3. 属性顺序  
-推荐使用下面的属性顺序:   
-    - class
-    - id
-    - name
+推荐使用下面的属性顺序: 身份性属性 > 数据性属性 > 状态性属性.
+    - class, id, name
     - data-*
     - src, for, type, href, value , max-length, max, min, pattern
     - placeholder, title, alt
@@ -64,6 +64,25 @@ Project
 1. 命名规范
     * 常规ID和类名避免使用大写命名, 采用中划线连字符方式, 如 `.home-header`
     * 推荐 `BEM` 规范
+
+        ```
+        // BEM 全称是 Blocks（模块）, Elements（元素） and Modifiers（修饰符
+        block：模块，名字单词间用 - 连接
+element：元素，模块的子元素，以 __ 与 block 连接
+modifier：修饰，模块的变体，定义特殊模块，以 -- 与 block 连接
+
+        // css
+        .home {}
+        .home .home-header {}
+        .home .home-header__title {}
+        // less
+        .home {
+            &-header {
+                &__title {}
+            }
+        }
+        ```
+   - (scss/less)中变量、函数、混合、placeholder采用驼峰式命名
 2. 样式规范
     * 样式顺序推荐： 
         1. 结构性属性:   
@@ -77,6 +96,7 @@ Project
         3. 其它.  
         4. 推荐使用`css combo`插件自动维护属性顺序.
         
+    * 属性值‘0’后面不要加单位
     * 对于复用度较高的属性, 采用定义局部或全局变量的方式.
     * 嵌套层级不宜过多. 以最多4层为宜.  
     * 避免使用 `important`.
@@ -105,6 +125,7 @@ Project
     - 可能存在错误的代码段
     - 浏览器/语言特殊的HACK代码
     - 业务逻辑强相关的代码
+    - 减少业务代码注释
 3. 函数
     - 单个函数代码行数不能过多.
     - 单个函数实现的功能不能过多, 保持函数的功能单一性, 适当提取单功能函数.
@@ -153,8 +174,8 @@ const defaultProps = {
 const propTypes = {
   name: React.PropTypes.string
 };
-class Person extends React.Component {
 
+class Person extends React.Component {
   // 构造函数
   constructor (props) {
     super(props);
@@ -251,11 +272,14 @@ render() {
     
 ### <h3 id='p6'>项目分支管理规范</h3>
 #### 命名规范
+* 参照 `git-flow` 规范.
+
 * git 分支分为集成分支、功能分支和修复分支，分别命名为 master/dev、feature 和 hotfix
-* 分支名称应包括类别, 开发者, 功能名称, 时间信息, 如 `feature/user/addSth0525`, `hotfix/user/fixHome0525`
+* 分支名称应包括类别, 功能名称, 时间信息, 如 `feature/addSth0525`, `hotfix/fixHome0525`
 
 #### 提交规范
 * 提交备注建议描述详细.
+
 #### 管理规范
 * 功能开发提交测试前需合并最新master分支.
 * 对于已经发布的分支, 需定期清理删除.
